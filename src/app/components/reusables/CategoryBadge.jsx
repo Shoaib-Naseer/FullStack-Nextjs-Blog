@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const CategoryBadge = ({category}) => {
+const CategoryBadge = ({ category }) => {
     return (
         <>
             <Link
@@ -10,12 +10,12 @@ const CategoryBadge = ({category}) => {
                 className={`flex items-center py-4 px-6 rounded justify-between gap-2 `}
                 href={`blog?cat=${category.slug}`}
             >
-                <Image  
+                {category.image && <Image
                     src={category.image}
                     width={32}
                     height={32}
                     className='rounded-[50%] h-[32px]'
-                />
+                />}
                 {category.name}
             </Link></>
     )

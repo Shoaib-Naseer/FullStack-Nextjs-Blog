@@ -1,10 +1,11 @@
 'use client'
+import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import React, { useState } from 'react'
 
 const AuthLinks = () => {
     const [open, setOpen] = useState(false)
-    const status = 'authenticated';
+    const {status} = useSession();
     return (
         <>
             {status !== "authenticated" ? (
@@ -12,7 +13,7 @@ const AuthLinks = () => {
             ) : (
                 <>
                     <Link href="/write">Write</Link>
-                    <span className='cursor-pointer'>Logout</span>
+                    <span className='cursor-pointer' onClick={signOut}>Logout</span>
                 </>
             )}
             <div className="md:hidden ml-auto">
@@ -31,7 +32,7 @@ const AuthLinks = () => {
                     ) : (
                         <>
                             <Link href="/write">Write</Link>
-                            <span className='cursor-pointer'>Logout</span>
+                            <span className='cursor-pointer' onClick={signOut}>Logout</span>
                         </>
                     )}
                 </div>}

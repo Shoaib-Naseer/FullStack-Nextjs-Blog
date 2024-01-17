@@ -46,6 +46,7 @@ const Menu = () => {
     },
     // Add more data objects as needed
   ];
+  
   return (
     <div className="flex-1 hidden md:block mt-8">
       <h2 className='text-gray-700 text-[16px] font-light'>{"What's hot"}</h2>

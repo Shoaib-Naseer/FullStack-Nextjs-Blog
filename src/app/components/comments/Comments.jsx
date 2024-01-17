@@ -1,50 +1,36 @@
-import Image from 'next/image';
-import Link from 'next/link';
+"use client";
 import React from 'react'
 import Comment from '../reusables/Comment';
+import useSWR from 'swr';
+import PostComment from '../reusables/PostComment';
 
-const Comments = () => {
-    const comments = [
-        {
-            id: 1,
-            user: {
-                name: 'John Doe',
-                avatar: '/p1.jpeg',
-            },
-            date: '01.01.2024',
-            content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit...',
-        },
-        {
-            id: 2,
-            user: {
-                name: 'John Doe',
-                avatar: '/p1.jpeg',
-            },
-            date: '02.01.2024',
-            content: 'Another comment with the same avatar...',
-        },
-        {
-            id: 3,
-            user: {
-                name: 'John Doe',
-                avatar: '/p1.jpeg',
-            },
-            date: '03.01.2024',
-            content: 'Yet another comment with the same avatar...',
-        },
-    ];
+
+const fetcher = async (url) => {
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (!res.ok) {
+        const error = new Error(data.message)
+        throw error;
+    }
+    return data.comments
+
+}
+
+const Comments = ({ postSlug }) => {
+    const { data,mutate, isLoading } = useSWR(`http://localhost:3000/api/comments?postSlug=${postSlug}`, fetcher)  
     return (
         <div className="comments | my-8">
-            {comments.map(comment => (
+             {mutate && <PostComment postSlug={postSlug} mutate={mutate} />}
+            {isLoading ? "loading" : data?.map(comment => (
                 <Comment
                     key={comment.id}
                     user={comment.user}
-                    date={comment.date}
-                    content={comment.content}
+                    date={comment.createdAt}
+                    content={comment.desc}
                 />
             ))}
         </div>
-
     )
 }
 

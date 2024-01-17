@@ -1,8 +1,14 @@
 import React from 'react'
 
-const Button = ({ children }) => {
+const Button = ({ children, onClick, disabled }) => {
+    const handleClick = () => {
+        if (onClick && !disabled) {
+            onClick();
+        }
+    };
     return (
-        <button className='w-[100px] border-0 p-2 bg-[crimson] text-white rounded cursor-pointer'>{children}</button>
+        <button onClick={handleClick} className={`w-[100px] border-0 p-2 bg-[crimson] ${disabled && 'opacity-50 cursor-not-allowed' 
+            } text-white rounded`}>{children}</button>
     )
 }
 

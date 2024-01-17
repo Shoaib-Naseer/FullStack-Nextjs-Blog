@@ -39,7 +39,7 @@ const Footer = () => {
       <div className="info | flex-1 flex flex-col gap-4">
         <div className="container | flex items-center gap-4">
           <div className="logoContainer | relative h-14 w-14">
-            <Image src='/logo.png' fill className='rounded-[50%]' />
+            <Image src='/logo.png' fill cla   ssName='rounded-[50%]' />
           </div>
           <h2 className='font-light text-xl'>Mindful Blog</h2>
         </div>

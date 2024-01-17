@@ -22,9 +22,12 @@ const Navbar = () => {
       
       <div className="flex gap-5 flex-1 items-center sm:text-sm md:text-md lg:text-xl " >
       <ToggleTheme />
-        <Link href="/" className='hidden md:block'>Homepage</Link>
+      {navLinks.map(link=>(
+        <Link href={link.href} className='hidden md:block'>{link.label}</Link>
+      ))}
+        {/* <Link href="/" className='hidden md:block'>Homepage</Link>
         <Link href="/" className='hidden md:block'>Contact</Link>
-        <Link href="/" className='hidden md:block'>About</Link>
+        <Link href="/" className='hidden md:block'>About</Link> */}
         <AuthLinks />
       </div>
     </div>

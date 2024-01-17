@@ -1,12 +1,14 @@
+'use client'
 import React from 'react';
-import styles from './pagination.module.css'
 import Button from '../reusables/Button';
+import { useRouter } from 'next/navigation';
 
-const Pagination = () => {
+const Pagination = ({ page, hasPrev, hasNext }) => {
+  const router = useRouter()
   return (
-    <div className='flex justify-between'>
-      <Button>Last</Button>
-      <Button>Next</Button>
+    <div className='flex justify-between px-4'>
+      <Button onClick={() => router.push(`?page=${page - 1}`)} disabled={!hasPrev}>Last</Button>
+      <Button onClick={() => router.push(`?page=${page + 1}`)} disabled={!hasNext}>Next</Button>
     </div>
   )
 }
